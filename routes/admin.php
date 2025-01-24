@@ -43,7 +43,7 @@ use App\Models\Product;
 use App\Models\Variation;
 use Illuminate\Support\Facades\Route;
 
-return;
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::get('register', [RegisteredUserController::class, 'create'])
