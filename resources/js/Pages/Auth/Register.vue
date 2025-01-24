@@ -1,112 +1,143 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import Checkbox from '@/Components/Checkbox.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import {Head, Link, useForm} from '@inertiajs/vue3';
+import {UserIcon, EyeIcon, EyeSlashIcon, KeyIcon, Bars2Icon} from "@heroicons/vue/24/outline";
+import {ref} from 'vue'
+import PhoneFields from "@/Components/PhoneFields.vue";
 
+defineProps({
+  canResetPassword: Boolean,
+  status: String,
+});
+let showPassword = ref(false);
 const form = useForm({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    terms: false,
+  fullname: null,
+  password: null,
+  password_confirmation: null,
+  phone: null,
+  phone_verify: null,
+  cmnd: 'register',
+  accesses: [],
 });
 
 const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
-    });
+
+  form.clearErrors();
+  form.post(route('register'), {
+    onFinish: () => (!form.errors) ? form.reset('password') : null,
+  });
 };
 </script>
 
 <template>
-    <Head title="Register" />
+  <GuestLayout :dir="dir()"
 
-    <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
+               aria-expanded="false"
+  >
+    <Head :title="__('signin')"/>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
-                <TextInput
-                    id="name"
-                    v-model="form.name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-                <InputError class="mt-2" :message="form.errors.name" />
+    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+      {{ status }}
+    </div>
+
+    <form @submit.prevent="submit">
+
+
+      <div class="my-2">
+        <TextInput
+            id="fullname"
+            type="text"
+            :placeholder="__('fullname')"
+            classes="  "
+            v-model="form.fullname"
+            autocomplete="fullname"
+            :error="form.errors.fullname"
+        >
+          <template v-slot:prepend>
+            <div class="p-3">
+              <Bars2Icon class="h-5 w-5"/>
             </div>
+          </template>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="username"
-                />
-                <InputError class="mt-2" :message="form.errors.email" />
+        </TextInput>
+      </div>
+      <div class="my-2">
+        <PhoneFields
+            v-model:phone="form.phone"
+            v-model:phone-verify="form.phone_verify"
+            :phone-error="form.errors.phone"
+            for="users"
+            :disable="false"
+            :phone-verify-error="form.errors.phone_verify"
+        />
+      </div>
+
+      <div class="mt-4">
+        <InputLabel for="password" :value="__('password')"/>
+
+        <TextInput
+            id="password"
+            :type="showPassword?'text':'password'"
+            classes=" "
+            v-model="form.password"
+            required
+            :error="form.errors.password"
+            autocomplete="current-password">
+
+          <template v-slot:prepend>
+            <div class="p-3" @click="showPassword=!showPassword">
+              <EyeIcon v-if="!showPassword"
+                       class="h-5 w-5   "/>
+              <EyeSlashIcon v-else class="h-5 w-5 "/>
             </div>
+          </template>
+        </TextInput>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password" />
+      </div>
+      <div class="my-2">
+        <TextInput
+            id="new_password_confirmation"
+            :type="showPassword?'text':'password'"
+            :placeholder="__('confirm_password')"
+            classes="  "
+            v-model="form.password_confirmation"
+            :autocomplete="form.password_confirmation"
+            :error="form.errors.password_confirmation"
+        >
+          <template v-slot:prepend>
+            <div class="p-3" @click="showPassword=!showPassword">
+              <EyeIcon v-if="!showPassword"
+                       class="h-5 w-5   "/>
+              <EyeSlashIcon v-else class="h-5 w-5 "/>
             </div>
+          </template>
 
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-                <TextInput
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
+        </TextInput>
 
-            <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
-                <InputLabel for="terms">
-                    <div class="flex items-center">
-                        <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
+      </div>
 
-                        <div class="ms-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Policy</a>
-                        </div>
-                    </div>
-                    <InputError class="mt-2" :message="form.errors.terms" />
-                </InputLabel>
-            </div>
+      <div class="    mt-4">
 
-            <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Already registered?
-                </Link>
+        <PrimaryButton class="w-full    " :class="{ 'opacity-25': form.processing }"
+                       :disabled="form.processing">
+          <span class=" text-lg w-full">  {{ __('register') }}</span>
+        </PrimaryButton>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
-            </div>
-        </form>
-    </AuthenticationCard>
+      </div>
+      <div class="w-full mt-5">
+        <span>{{ __('register_before?') }}</span>
+        <Link
+            :href="route('login')"
+            class="underline mx-2 text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          {{ __('signin') }}
+        </Link>
+      </div>
+    </form>
+  </GuestLayout>
 </template>
