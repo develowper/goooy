@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 //            Variable::MODELS[Business::class] => Business::class,
 
         ]);
-        Schema::defaultStringLength(255);
+        Schema::defaultStringLength(191);
         $this->configureValidators();
         $this->configureRoutes();
         $this->configureRateLimiting();
