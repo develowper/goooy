@@ -128,10 +128,10 @@
         </div>
 
 
-        <div class="    ">
-          <Cube class="" :data="$page.props.rubikFaces">
-          </Cube>
-        </div>
+<!--        <div class="    ">-->
+          <!--          <Cube class="" :data="$page.props.rubikFaces">-->
+          <!--          </Cube>-->
+          <!--        </div>-->
 
       </div>
       <div class="container  mx-auto space-y-4 relative">
