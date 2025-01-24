@@ -9,7 +9,7 @@ import 'lity/dist/lity.min.css';
 import {createApp, h} from 'vue';
 import {createInertiaApp} from '@inertiajs/vue3';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
-import {ZiggyVue} from '../../vendor/tightenco/ziggy/dist/vue.m';
+import {ZiggyVue} from '../../vendor/tightenco/ziggy';
 import Mixins from "@/vue-mixins";
 import TgMixins from "@/telegram-mixins";
 import LoadScript from 'vue-plugin-load-script';
