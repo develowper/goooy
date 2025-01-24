@@ -11,12 +11,12 @@ use App\Models\Pack;
 use App\Models\Product;
 use App\Models\Repository;
 use App\Models\ShippingMethod;
-use App\Models\Site;
 use App\Models\User;
 use DateTimeZone;
 use   Illuminate\Support\Facades\Http;
 use   Illuminate\Support\Facades\Log as Logger;
 use Morilog\Jalali\Jalalian;
+use App\Events\SendToTelegram;
 
 class Telegram
 {
@@ -469,6 +469,12 @@ class Telegram
     }
 
     static function log($to, $type, $data)
+    {
+        SendToTelegram::dispatch($to, $type, $data);
+
+    }
+
+    static function sendLog($to, $type, $data)
     {
 
         try {
