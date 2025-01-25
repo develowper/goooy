@@ -8,9 +8,25 @@ use App\Http\Requests\SettingRequest;
 use App\Models\Admin;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SettingController extends Controller
 {
+
+    public function skinIndex()
+    {
+
+        $data = Setting::whereIn('key', ['menu', 'slider'])->get();
+        $slider = $data->where('key', 'slider')->first();
+        $slider->value = array_merge(json_decode($slider->value ?? '[]'), [['title' => null, 'desc' => null, 'image' => null, 'link' => null,]]);
+        $this->authorize('create', [Admin::class, Setting::class]);
+        return Inertia::render('Panel/Admin/Skin/Index', [
+            'slider' => $slider,
+            'menu' => json_decode($data->where('key', 'menu')->first() ?? '[]'),
+
+        ]);
+    }
+
     public function searchPanel(Request $request)
     {
         $user = $request->user();
@@ -56,7 +72,10 @@ class SettingController extends Controller
         } else {
             $data->key = $key;
             $data->value = $value;
+
             if ($data->save()) {
+                if (strlen($data->value) > 2048)
+                    $data->value = 'too_long';
                 Telegram::log(null, 'setting_updated', $data);
                 return response()->json(['message' => __('updated_successfully'),], Variable::SUCCESS_STATUS);
 

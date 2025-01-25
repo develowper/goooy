@@ -1,72 +1,85 @@
 <template>
-    <nav class="fixed w-full z-[1043] top-0 ">
-        <div class="max-w-7xl  mx-auto   px-2 lg:px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-4">
-                    <!-- Website Logo -->
-                    <div>
-                        <Link :href="route('/')" class="flex  items-center py-4 px-2">
-                            <ApplicationLogo class="  h-9 fill-current text-primary-600"/>
-                            <span class="font-semibold text-white nav-item text-lg mx-2"
-                            >{{ __('app_name') }}</span>
 
-                        </Link>
-                    </div>
+    <nav class=" w-full   top-0 ">
+        <div class="  flex flex-col   mx-auto bg-white   ">
+            <div class="flex items-center justify-between px-2 lg:px-4 ">
+                <!-- Website Logo -->
+                <div>
+                    <Link :href="route('/')" class="flex  items-center py-6 px-2">
+                        <ApplicationLogo class="  h-9 fill-current text-primary-600"/>
+                        <span v-if="false" class="font-semibold text-primary-500 nav-item text-lg mx-2"
+                        >{{ __('app_name') }}</span>
 
+                    </Link>
                 </div>
-                <!-- Primary Navbar items -->
                 <div
-                    class="hidden md:flex items-center grow  justify-start  text-xs  transition-all duration-500">
-                    <div class="flex items-center">
-                        <!--            <Link :href="route('/')" class="px-4 nav-item" :class="navClasses('/')">-->
-                        <!--              {{ __('home') }}-->
-                        <!--            </Link>-->
+                    class="text-primary-500 animate-pulse  font-bold  text-md p-4   shadow-primary-400       delay-300">
+                    {{ $page.props.hero_text }}
+                </div>
+                <div class="flex items-center z-[1043]">
+                    <div class="flex flex-col items-center">
+                        <UserButton/>
+                    </div>
+                </div>
+            </div>
+            <div class="sticky top-0 ">
+                <div id="navbar" class=" flex bg-primary-500 justify-between px-2 lg:px-4 ">
 
-                        <Link :href="route('shop.index')" class="nav-item" :class="navClasses('shop')">
-                            {{ __('shop') }}
-                        </Link>
-                        <Link :href="route('article.index')" class="nav-item" :class="navClasses('article')">
-                            {{ __('articles') }}
-                        </Link>
-                        <button @click="scrollTo('footer') " class="nav-item " :class="navClasses('page.contact_us')">
-                            {{ __('contact_us') }}
+                    <!-- Primary Navbar items -->
+                    <div
+                        class="hidden md:flex items-center grow  justify-start  text-xs  transition-all duration-500">
+                        <div class="flex items-center">
+                            <!--            <Link :href="route('/')" class="px-4 nav-item" :class="navClasses('/')">-->
+                            <!--              {{ __('home') }}-->
+                            <!--            </Link>-->
+
+                            <Link :href="route('shop.index')" class="nav-item" :class="navClasses('shop')">
+                                {{ __('shop') }}
+                            </Link>
+                            <Link :href="route('article.index')" class="nav-item" :class="navClasses('article')">
+                                {{ __('articles') }}
+                            </Link>
+                            <button @click="scrollTo('footer') " class="nav-item "
+                                    :class="navClasses('page.contact_us')">
+                                {{ __('contact_us') }}
+                            </button>
+                            <!--            <Link :href="route('page.contact_us')" class="nav-item " :class="navClasses('page.contact_us')">-->
+                            <!--              {{ __('contact_us') }}-->
+                            <!--            </Link>-->
+                            <!--            <Link :href="route('page.contact_us')" class="nav-item" :class="navClasses('contact_us')">-->
+                            <!--              {{ __('contact_us') }}-->
+                            <!--            </Link>-->
+                            <!--                        <Link :href="route('exchange.index')" class="nav-item" :class="navClasses('exchange')">-->
+                            <!--                            {{ __('exchange') }}-->
+                            <!--                        </Link>-->
+                        </div>
+                        <div class="flex items-center">
+                            <!--            <Link :href="route('page.prices')" class="nav-item" :class="navClasses('prices')">-->
+                            <!--              {{ __('prices') }}-->
+                            <!--            </Link>-->
+                            <!--            <Link :href="route('page.help')" class="nav-item" :class="navClasses('help')">-->
+                            <!--              {{ __('help') }}-->
+                            <!--            </Link>-->
+                            <!--            <Link :href="route('page.contact_us')" class="nav-item" :class="navClasses('contact_us')">-->
+                            <!--              {{ __('contact_us') }}-->
+                            <!--            </Link>-->
+
+
+                        </div>
+
+                    </div>
+                    <!-- Secondary Navbar items -->
+                    <div class="   flex items-center space-x-3   ">
+                        <CartButton/>
+                        <!--                        < UserButton/>-->
+                        <!--          <LanguageButton/>-->
+                    </div>
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden flex items-center nav-item ">
+                        <button class="h-9 w-9   border-2 rounded  mobile-menu-button ">
+                            <Bars3Icon class=" " className="  "/>
                         </button>
-                        <!--            <Link :href="route('page.contact_us')" class="nav-item " :class="navClasses('page.contact_us')">-->
-                        <!--              {{ __('contact_us') }}-->
-                        <!--            </Link>-->
-                        <!--            <Link :href="route('page.contact_us')" class="nav-item" :class="navClasses('contact_us')">-->
-                        <!--              {{ __('contact_us') }}-->
-                        <!--            </Link>-->
-                        <!--                        <Link :href="route('exchange.index')" class="nav-item" :class="navClasses('exchange')">-->
-                        <!--                            {{ __('exchange') }}-->
-                        <!--                        </Link>-->
                     </div>
-                    <div class="flex items-center">
-                        <!--            <Link :href="route('page.prices')" class="nav-item" :class="navClasses('prices')">-->
-                        <!--              {{ __('prices') }}-->
-                        <!--            </Link>-->
-                        <!--            <Link :href="route('page.help')" class="nav-item" :class="navClasses('help')">-->
-                        <!--              {{ __('help') }}-->
-                        <!--            </Link>-->
-                        <!--            <Link :href="route('page.contact_us')" class="nav-item" :class="navClasses('contact_us')">-->
-                        <!--              {{ __('contact_us') }}-->
-                        <!--            </Link>-->
-
-
-                    </div>
-
-                </div>
-                <!-- Secondary Navbar items -->
-                <div class="   flex items-center space-x-3   ">
-                    <CartButton/>
-                    <UserButton/>
-                    <!--          <LanguageButton/>-->
-                </div>
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center nav-item ">
-                    <button class="h-9 w-9   border-2 rounded  mobile-menu-button ">
-                        <Bars3Icon class=" " className="  "/>
-                    </button>
                 </div>
             </div>
         </div>
@@ -129,10 +142,26 @@ export default {
         });
 
         this.setScrollListener();
+        return
+        const navbar = document.getElementById("navbar");
+
+        // Get the initial offset position of the navbar
+        const stickyOffset = navbar.offsetTop;
+
+        // Add a scroll event listener
+        window.addEventListener("scroll", function () {
+            if (window.pageYOffset >= stickyOffset) {
+                navbar.classList.add("fixed");
+                navbar.classList.add("top-0");
+            } else {
+                navbar.classList.remove("fixed");
+                navbar.classList.remove("top-0");
+            }
+        });
     },
     methods: {
         navClasses(item) {
-            let base = "py-4 rounded-lg px-2 lg:px-2    font-semibold  transition    hover:bg-primary-400 hover:text-white  duration-300 ";
+            let base = " py-4 rounded-lg px-2 lg:px-2    font-semibold  transition    hover:bg-primary-400 hover:text-white  duration-300 ";
             if (item && (this.route().current(`${item}.*`) || this.route().current(`${item}`)))
                 base = "py-4 active rounded-lg px-2 lg:px-2 text-primary-500  bg-primary-100   font-semibold  transition    hover:bg-primary-400 hover:text-white  duration-300 ";
             return base;
@@ -141,7 +170,7 @@ export default {
             var scrollpos = window.scrollY;
             var nav = document.getElementsByTagName("nav")[0];
             var links = document.querySelectorAll(".nav-item");
-            var buttons = document.querySelectorAll(".btn");
+            var buttons = [];// document.querySelectorAll(".btn");
             if (this.theme == 'light') {
                 nav.classList.remove("bg-transparent");
                 nav.classList.add("bg-white");

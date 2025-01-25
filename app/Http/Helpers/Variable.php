@@ -312,6 +312,8 @@ class Variable
             ['key' => 'order_percent_level_2', 'value' => 0, "created_at" => \Carbon\Carbon::now(),],
             ['key' => 'order_percent_level_3', 'value' => 0, "created_at" => \Carbon\Carbon::now(),],
             ['key' => 'operator_profit_percent', 'value' => 20, "created_at" => \Carbon\Carbon::now(),],
+            ['key' => 'slider', 'value' => null, "created_at" => \Carbon\Carbon::now(),],
+            ['key' => 'menu', 'value' => null, "created_at" => \Carbon\Carbon::now(),],
 
         ];
     }

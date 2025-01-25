@@ -51,21 +51,39 @@
                             <IdentificationIcon class="w-12 h-12 text-primary-300 "/>
                         </div>
 
-                    </section>  <!-- setting card -->
-                    <Link v-if="hasAccess('edit_settings')" :href="route('admin.panel.setting.index')"
-                          :class="cardShadow"
-                          class="flex   hover:scale-[101%] transition duration-300 cursor-pointer   items-center justify-between p-4 bg-white  rounded-lg ">
-                        <div>
-                            <h6 class="text-xl font-bold   py-2 tracking-wider text-gray-500 uppercase">
-                                {{ __('settings') }}
-                            </h6>
+                    </section>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                        <!-- setting card -->
+                        <Link v-if="hasAccess('edit_settings')" :href="route('admin.panel.setting.index')"
+                              :class="cardShadow"
+                              class="flex   hover:scale-[101%] transition duration-300 cursor-pointer   items-center justify-between p-4 bg-white  rounded-lg ">
+                            <div>
+                                <h6 class="text-xl font-bold   py-2 tracking-wider text-gray-500 uppercase">
+                                    {{ __('settings') }}
+                                </h6>
 
-                        </div>
-                        <div>
-                            <Cog6ToothIcon class="w-12 h-12 text-primary-300 "/>
-                        </div>
+                            </div>
+                            <div>
+                                <Cog6ToothIcon class="w-12 h-12 text-primary-300 "/>
+                            </div>
 
-                    </Link>
+                        </Link>
+                        <!-- skin card -->
+                        <Link v-if="hasAccess('edit_settings')" :href="route('admin.panel.skin.index')"
+                              :class="cardShadow"
+                              class="flex   hover:scale-[101%] transition duration-300 cursor-pointer   items-center justify-between p-4 bg-white  rounded-lg ">
+                            <div>
+                                <h6 class="text-xl font-bold   py-2 tracking-wider text-gray-500 uppercase">
+                                    {{ __('skin') }}
+                                </h6>
+
+                            </div>
+                            <div>
+                                <EyeDropperIcon class="w-12 h-12 text-primary-300 "/>
+                            </div>
+
+                        </Link>
+                    </div>
                     <!-- ticket card -->
                     <Link :href="route('panel.ticket.index')" :class="cardShadow"
                           class="flex hover:scale-[101%] transition duration-300 cursor-pointer   items-center justify-around   p-4 bg-white  rounded-lg">
@@ -304,6 +322,7 @@ import {
     UserIcon,
     BriefcaseIcon,
     IdentificationIcon,
+    EyeDropperIcon,
 } from "@heroicons/vue/24/outline";
 import {inject, watchEffect} from "vue";
 import Chart from "@/Components/Chart.vue";
@@ -353,6 +372,7 @@ export default {
         UserIcon,
         BriefcaseIcon,
         IdentificationIcon,
+        EyeDropperIcon,
     },
     mounted() {
         // console.log(this.$emit('showToast'))
