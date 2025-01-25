@@ -36,7 +36,7 @@ class SettingController extends Controller
         $dir = $request->dir ?: 'DESC';
         $paginate = $request->paginate ?: 24;
 
-        $query = Setting::query();
+        $query = Setting::query()->whereNotIn('key', ['slider', 'menu']);
 
 
         if ($search)
