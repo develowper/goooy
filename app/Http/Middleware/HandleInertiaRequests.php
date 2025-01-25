@@ -73,7 +73,7 @@ class HandleInertiaRequests extends Middleware
             },
             'hero_text' => \App\Models\Setting::getValue('hero_main_page'),
             'head_notification' => Setting::getValue('head_notification'),
-            'slider' => json_Decode(Setting::getValue('slider') ?? '[]'),
+            'slider' => json_decode(Setting::getValue('slider') ?? '[]'),
             'statuses' => Variable::STATUSES,
             'categories' => \App\Models\Category::get(),
             'langs' => Variable::LANGS,
