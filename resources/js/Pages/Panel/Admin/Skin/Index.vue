@@ -38,7 +38,7 @@
                             <Slider ref="slider" :items="$page.props.slider.value" mode="edit"></Slider>
                         </div>
                         <PrimaryButton
-                            @click="showDialog('danger',__('sure_to_edit?'),__('accept'),edit,{ 'id':$page.props.slider.id,'key':$page.props.slider.key, 'value':   JSON.stringify($refs.slider.getItems() || [] ) }) "
+                            @click="showDialog('danger',__('sure_to_edit?'),__('accept'),edit,{ 'id':$page.props.slider.id,'key':$page.props.slider.key, 'value':    $refs.slider.getItems() || []   }) "
                             type="button" class="  m-2 flex justify-center"
                             :class="{ 'opacity-25': loading }"
                             :disabled="loading">

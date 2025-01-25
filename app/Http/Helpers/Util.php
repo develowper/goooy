@@ -66,15 +66,14 @@ class Util
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
         $image_base64 = base64_decode($image_parts[1]);
-
-        if (!Storage::exists("public/$type")) {
-            File::makeDirectory(Storage::path("public/$type"), $mode = 0755,);
+        if (!Storage::disk('public')->exists("$type")) {
+            File::makeDirectory(Storage::disk('public')->path("$type"), $mode = 0755,);
         }
         $source = imagecreatefromstring($image_base64);
         if ($folder) { //is gallery
-            if (!Storage::exists("public/$type/$folder"))
-                File::makeDirectory(Storage::path("public/$type/$folder"), $mode = 0755,);
-            $allFiles = Storage::allFiles("public/$type/$folder");
+            if (!Storage::disk('public')->exists("$type/$folder"))
+                File::makeDirectory(Storage::disk('public')->path("$type/$folder"), $mode = 0755,);
+            $allFiles = Storage::disk('public')->allFiles("$type/$folder");
             if (!$name) {
                 $name = 1;
                 foreach ($allFiles as $path) {

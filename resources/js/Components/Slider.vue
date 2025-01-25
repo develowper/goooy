@@ -27,7 +27,6 @@
                         class="  p-2 text-white rounded-md bg-green-500 hover:bg-green-400 hover:cursor-pointer">
                         <PlusIcon class="w-4 h-4  "/>
                     </div>
-
                     <div class="grow">
                         <ImageUploader mode="create"
 

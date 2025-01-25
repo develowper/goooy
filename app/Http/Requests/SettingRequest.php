@@ -55,7 +55,7 @@ class SettingRequest extends FormRequest
             'key.unique' => sprintf(__("validator.unique"), __('key')),
 
             'value.required' => sprintf(__("validator.required"), __('value')),
-            'value.max' => sprintf(__("validator.max_len"), __('value'), 1024, mb_strlen($this->value)),
+            'value.max' => sprintf(__("validator.max_len"), __('value'), 1024, is_string($this->value) ? mb_strlen($this->value) : count($this->value)),
 
 
         ];
