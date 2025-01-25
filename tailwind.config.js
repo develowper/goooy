@@ -20,8 +20,8 @@ export default {
                 sans: ['Yekan', 'Tanha', 'Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary: colors.indigo,
-                secondary: colors.gray,
+                primary: colors.teal,
+                secondary: colors.amber,
             },
             fontSize: {
                 sm: '0.8rem',

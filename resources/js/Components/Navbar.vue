@@ -5,7 +5,7 @@
                 <div class="flex space-x-4">
                     <!-- Website Logo -->
                     <div>
-                        <Link :href="route('/')" class="flex items-center py-4 px-2">
+                        <Link :href="route('/')" class="flex  items-center py-4 px-2">
                             <ApplicationLogo class="  h-9 fill-current text-primary-600"/>
                             <span class="font-semibold text-white nav-item text-lg mx-2"
                             >{{ __('app_name') }}</span>
