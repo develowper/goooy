@@ -1,6 +1,6 @@
 <template>
 
-    <nav class=" w-full   top-0 ">
+    <nav :id="id" class=" w-full   top-0 ">
         <div class="  flex flex-col   mx-auto bg-white   ">
             <div class="flex items-center justify-between px-2 lg:px-4 ">
                 <!-- Website Logo -->
@@ -71,11 +71,11 @@
                     <!-- Secondary Navbar items -->
                     <div></div>
                     <!-- Mobile menu button -->
-                    <div class="justify-end p-1 flex   items-center nav-item ">
+                    <div class="justify-end p-1 flex    items-center nav-item ">
                         <CartButton class="m-1"/>
-                        <Bars3Icon
-                            class="md:hidden h-9 w-9 hover:bg-primary-400 hover:cursor-pointer  border rounded-lg  "
-                            className="  "/>
+                        <Bars3Icon id="mobile-menu-button"
+                                   class="md:hidden mobile-menu-button h-9 w-9 hover:bg-primary-400 hover:cursor-pointer  border rounded-lg  "
+                                   className="  "/>
 
 
                     </div>
@@ -127,12 +127,12 @@ export default {
         CartButton,
 
     },
-    props: ['theme'],
+    props: ['theme', 'id'],
     data() {
         return {}
     }, mounted() {
-        const btn = document.querySelector("button.mobile-menu-button");
-        const menu = document.querySelector(".mobile-menu");
+        const btn = document.querySelector("svg.mobile-menu-button");
+        const menu = document.querySelector("div.mobile-menu");
 
         // Add Event Listeners
         btn.addEventListener("click", () => {
@@ -214,7 +214,7 @@ export default {
                 }
 
             }
-
+            return;
             document.addEventListener("scroll", function () {
                 /*Apply classes for slide in bar*/
                 scrollpos = window.scrollY;
