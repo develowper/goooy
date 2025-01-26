@@ -71,10 +71,26 @@
             </div>
 
         </div>
+        <!--        <Link v-else :href="profileLink( )"-->
+        <!--              class="flex mx-1 btn  border    font-medium-->
+        <!--            focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-300 ease-in-out     p-2 rounded-lg  rounded-lg hover:bg-primary-400 hover:text-white">-->
+        <!--            <UserIcon class=" h-5 w-5"/>-->
+
+        <!--        </Link>  -->
         <Link v-else :href="profileLink( )"
-              class="flex mx-1 btn  border    font-medium
-            focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-300 ease-in-out     p-2 rounded-lg  rounded-lg hover:bg-primary-400 hover:text-white">
-            <UserIcon class=" h-5 w-5"/>
+              class=" btn hover:text-primary-500 z-10 flex items-center p-2 text-sm text-gray-600   border-s   border-primary-200     dark:text-white dark:bg-gray-800 focus:outline-none">
+            <div class="flex flex-col items-center gap-2">
+                <div class="flex">
+
+                    <UserIcon class=" h-5 w-5"/>
+
+                </div>
+
+                <div class="flex">
+
+                    <span class="mx-1 text-xs"> {{ __('account') }}</span>
+                </div>
+            </div>
 
         </Link>
 

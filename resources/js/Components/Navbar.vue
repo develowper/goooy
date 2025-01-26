@@ -13,7 +13,7 @@
                     </Link>
                 </div>
                 <div
-                    class="text-primary-500 animate-pulse  font-bold  text-md p-4   shadow-primary-400       delay-300">
+                    class="text-primary-500 animate-pulse  font-bold text-xs md:text-md p-4   shadow-primary-400       delay-300">
                     {{ $page.props.hero_text }}
                 </div>
                 <div class="flex items-center z-[1043]">
@@ -69,16 +69,15 @@
 
                     </div>
                     <!-- Secondary Navbar items -->
-                    <div class="   flex items-center space-x-3   ">
-                        <CartButton/>
-                        <!--                        < UserButton/>-->
-                        <!--          <LanguageButton/>-->
-                    </div>
+                    <div></div>
                     <!-- Mobile menu button -->
-                    <div class="md:hidden flex items-center nav-item ">
-                        <button class="h-9 w-9   border-2 rounded  mobile-menu-button ">
-                            <Bars3Icon class=" " className="  "/>
-                        </button>
+                    <div class="justify-end p-1 flex   items-center nav-item ">
+                        <CartButton class="m-1"/>
+                        <Bars3Icon
+                            class="md:hidden h-9 w-9 hover:bg-primary-400 hover:cursor-pointer  border rounded-lg  "
+                            className="  "/>
+
+
                     </div>
                 </div>
             </div>

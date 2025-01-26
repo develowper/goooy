@@ -49,9 +49,9 @@
                     </div>
                 </div>
             </swiper-slide>
-            <swiper-slide v-else v-for="(item,idx) in items" class="relative     ">
+            <swiper-slide v-else v-for="(item,idx) in items" class="relative  shadow-md   ">
 
-                <Image classes="h-full w-full" :src="item.image" disabled="true"></Image>
+                <Image :class="imageClasses" classes=" h-full w-full" :src="item.image" disabled="true"></Image>
 
                 <div class="absolute bottom-0 text-center w-full">
                     <div v-if="item.title || item.description"
@@ -92,7 +92,7 @@ export default {
             data: this.items
         }
     },
-    props: ['delay', 'items', 'mode'],
+    props: ['delay', 'items', 'mode', 'image-classes'],
 
     components: {
         TextInput,

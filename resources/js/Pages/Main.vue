@@ -10,10 +10,12 @@
             <div
                 class="relative    bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary-300 to-primary-700">
                 <!--Slider-->
-                <div v-if="$page.props.head_notification"></div>
+                <div class="animate-pulse bg-primary-600 text-white p-1 text-sm" v-if="$page.props.head_notification">
+                    $page.props.head_notification
+                </div>
                 <div v-if="$page.props.slider.length>0"
                      class="   shadow-md bg-white    overflow-hidden h-72 lg:h-72 xl:h-[24rem] w-full   start-0 end-0  ">
-                    <Slider :items="$page.props.slider" :delay="8000"></Slider>
+                    <Slider image-classes="object-cover " :items="$page.props.slider" :delay="8000"></Slider>
                 </div>
                 <div v-else
                      class="opacity-60   bg-no-repeat  bg-cover  blur-sm   z-0 absolute  bottom-2     w-full   h-full      "
