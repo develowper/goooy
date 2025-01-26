@@ -84,20 +84,22 @@
         </div>
         <!-- mobile menu -->
         <div
-            class="hidden mobile-menu flex flex-col duration-300  bg-primary-500 px-4 shadow-md p-4">
-            <Link :href="route('/')" class="px-4 mobile nav-item" :class="navClasses('/')">
-                {{ __('home') }}
-            </Link>
+            class="h-0   block sm:hidden    mobile-menu  transform transition-all duration-500  bg-primary-500 px-4 shadow-md  ">
+            <div class="mobile-menu-content flex flex-col ">
+                <Link :href="route('/')" class="px-4 mobile nav-item" :class="navClasses('/')">
+                    {{ __('home') }}
+                </Link>
 
-            <Link :href="route('shop.index')" class="mobile nav-item" :class="navClasses('shop')">
-                {{ __('shop') }}
-            </Link>
-            <Link :href="route('article.index')" class="mobile nav-item" :class="navClasses('article')">
-                {{ __('articles') }}
-            </Link>
-            <button @click="scrollTo('footer') " class=" mobile nav-item " :class="navClasses('page.contact_us')">
-                {{ __('contact_us') }}
-            </button>
+                <Link :href="route('shop.index')" class="mobile nav-item" :class="navClasses('shop')">
+                    {{ __('shop') }}
+                </Link>
+                <Link :href="route('article.index')" class="mobile nav-item " :class="navClasses('article')">
+                    {{ __('articles') }}
+                </Link>
+                <button @click="scrollTo('footer') " class=" mobile nav-item " :class="navClasses('page.contact_us')">
+                    {{ __('contact_us') }}
+                </button>
+            </div>
             <!--      <Link :href="route('page.contact_us')" class="nav-ite " :class="navClasses('page.contact_us')">-->
             <!--        {{ __('contact_us') }}-->
             <!--      </Link>-->
@@ -133,30 +135,45 @@ export default {
     }, mounted() {
         const btn = document.querySelector("svg.mobile-menu-button");
         const menu = document.querySelector("div.mobile-menu");
+        const menuContent = document.querySelector("div.mobile-menu-content");
 
-        // Add Event Listeners
+        function slide() {
+
+            if (menu.style.height === "0px" || menu.style.height === "") {
+                // Measure the height of the content
+                const contentHeight = menuContent.offsetHeight;
+                // Set the height dynamically
+                menu.style.height = `${contentHeight}px`;
+                menuContent.classList.add('opacity-0')
+
+            } else {
+                // Collapse the menu
+                menu.style.height = "0px";
+                menuContent.classList.remove('opacity-0')
+
+
+            }
+        }
+
+        menuContent.classList.add('opacity-0')
+
         btn.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-
+            slide()
+            menuContent.classList.toggle('opacity-0')
         });
+
+        // Add a transition end event listener to clean up
+        // menu.addEventListener("transitionend", () => {
+        //     if (menu.style.height !== "0px") {
+        //         // Reset height to auto after animation for responsiveness
+        //         menu.style.height = "auto";
+        //     }
+        // });
+
 
         this.setScrollListener();
-        return
-        const navbar = document.getElementById("navbar");
 
-        // Get the initial offset position of the navbar
-        const stickyOffset = navbar.offsetTop;
 
-        // Add a scroll event listener
-        window.addEventListener("scroll", function () {
-            if (window.pageYOffset >= stickyOffset) {
-                navbar.classList.add("fixed");
-                navbar.classList.add("top-0");
-            } else {
-                navbar.classList.remove("fixed");
-                navbar.classList.remove("top-0");
-            }
-        });
     },
     methods: {
         navClasses(item) {
