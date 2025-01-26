@@ -73,7 +73,10 @@ class HandleInertiaRequests extends Middleware
             },
             'hero_text' => \App\Models\Setting::getValue('hero_main_page'),
             'head_notification' => Setting::getValue('head_notification'),
-            'slider' => json_decode(Setting::getValue('slider') ?? '[]') ?? [],
+            'slider' => collect(json_decode(Setting::getValue('slider') ?? '[]') ?? [])->map(function ($item) {
+                $item->image = route('storage.slides') . "/" . ($item->id ?? '') . ".jpg";
+                return $item;
+            }),
             'statuses' => Variable::STATUSES,
             'categories' => \App\Models\Category::get(),
             'langs' => Variable::LANGS,
