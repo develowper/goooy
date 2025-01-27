@@ -13,7 +13,7 @@
                     </Link>
                 </div>
                 <div
-                    class="text-primary-500 animate-pulse  font-bold text-xs md:text-md p-4   shadow-primary-400       delay-300">
+                    class="text-primary-500 animate-pulse text-center  font-bold text-xs md:text-sm p-4   shadow-primary-400       delay-300">
                     {{ $page.props.hero_text }}
                 </div>
                 <div class="flex items-center z-[1043]">
